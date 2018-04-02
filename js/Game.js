@@ -20,8 +20,7 @@ Game.prototype.drawAll = function () {
 
 //// Pintamos los elementos en el canvas
 Game.prototype.moveAll = function () {
-  // movemos el player
-  this.player.setListener();
+  this.player.setListener(); // movemos el player
 }
 
 //// Empieza el juego. Inicializamos todo
@@ -32,6 +31,6 @@ Game.prototype.start = function () {
     this.drawAll(); // pintamos todo
     this.moveAll(); // movemos el Player
 
-  }.bind(this), 3);
+  }.bind(this), 30);
 
 }
