@@ -1,4 +1,4 @@
-// Constructor
+//// Constructor
 function Background (game) {
   // Estamos pasando el Canvas para pintar con los metodos CTX
   this.game = game;
@@ -34,5 +34,17 @@ Background.prototype.draw = function() {
   );
 }
 
-// Movemos el fondo
-Background.prototype.move = function() {}
+
+// el player se mueve hacia adelante
+Background.prototype.moveForward = function () {
+  this.x += 4;
+}
+
+/*
+// escuchamos el teclado para mover el background
+Background.prototype.setListener = function () {
+  document.onkeyup = function (k) {
+    if (k.keyCode === 65 || k.keyCode === 83) { this.moveForward(); }
+  }.bind(this);
+}
+*/
