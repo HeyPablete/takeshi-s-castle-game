@@ -11,6 +11,11 @@ function Player (game) {
   this.x = document.getElementById("canvas").width / 3; // aparece en 1/3 del ancho del canvas
   this.y = document.getElementById("canvas").height - this.h;
 
+  this.y0 = 500;
+//  this.y = this.y0;
+  // valores para el salto
+  this.vy = 0; // velocidad de Y
+  this.g = 0.3; // Gravedad
 }
 
 //// EL RECTANGULO PARA QUE SE VEA EL PLAYER. CUANDO LO CAMBIE POR UNA IMG ESTO NO HARÁ FALTA
@@ -27,5 +32,12 @@ Player.prototype.draw = function (x, y, width, height) {
 
 // el player salta
 Player.prototype.moveJump = function () {
-  this.y -= 10;
+//  this.y -= 10;
+  if (this.y < this.y0) {
+    this.vy += this.g;
+    this.y += this.vy;
+  } else {
+    this.vy = 0;
+    this.y = this.y0;
+  }
 }
