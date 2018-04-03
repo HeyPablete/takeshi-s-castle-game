@@ -1,43 +1,22 @@
-//// Constructor
 function Player (game) {
-  // Estamos pasando el Canvas para pintar con los metodos CTX
   this.game = game;
-
-  // ancho y alto del Player
-  this.w = 30;
-  this.h = 70;
-
-  // posicion del Player
-  this.x = document.getElementById("canvas").width / 3; // aparece en 1/3 del ancho del canvas
-  this.y = document.getElementById("canvas").height - this.h;
-
-  this.y0 = 500;
-//  this.y = this.y0;
-  // valores para el salto
-  this.vy = 0; // velocidad de Y
-  this.g = 0.3; // Gravedad
+  this.width = 30;
+  this.height = 70;
+  this.color = "#ff0000";
+  this.x = this.game.canvas.width / 3;
+  this.y = 0;
+  this.speedY = 6;
+  this.isJumping = false;
 }
-
-//// EL RECTANGULO PARA QUE SE VEA EL PLAYER. CUANDO LO CAMBIE POR UNA IMG ESTO NO HARÁ FALTA
-Player.prototype.drawRect = function (x, y, width, height) {
-  this.game.ctx.fillRect(x, y, width, height);
+Player.prototype.draw = function () {
+  this.game.ctx.fillStyle = this.color;
+  this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+  this.gravity();
+  this.jump();
 }
-
-//// Pintamos el player
-Player.prototype.draw = function (x, y, width, height) {
-  //this.game.ctx.drawImage(); // LO NECESITARÉ PARA COLOCAR LA IMG DEL PLAYER AQUI
-  this.game.ctx.fillStyle = "#ff0000";
-  this.drawRect(this.x, this.y, this.w, this.h); // Pintamos el rectangulo
-}
-
-// el player salta
-Player.prototype.moveJump = function () {
-//  this.y -= 10;
-  if (this.y < this.y0) {
-    this.vy += this.g;
-    this.y += this.vy;
-  } else {
-    this.vy = 0;
-    this.y = this.y0;
-  }
-}
+Player.prototype.gravity = function () {
+  if(this.y < (this.game.canvas.height - this.height)) { this.y += this.speedY; }
+};
+Player.prototype.jump = function () {
+  if(this.isJumping && this.y >= 400) { this.y -= this.speedY * 2 }
+};
