@@ -5,7 +5,7 @@ function Player (game) {
   this.redPlayer = "#ff0000";
   this.x = this.game.canvas.width / 3;
   this.y = this.game.canvas.height - this.game.canvas.height / 5;
-  this.speedY = 6;
+  this.speedY = 10;
   this.isJumping = false;
 }
 Player.prototype.draw = function () {

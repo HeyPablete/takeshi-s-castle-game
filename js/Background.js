@@ -9,7 +9,7 @@ function Background (game) {
   this.img = new Image(); // creamos una nueva imagen, PARA VARIOS ESCENARIOS TENDRÉ QUE CREAR UN ARRAY DE IMAGENES
   this.img.src = "images/01-bg.png";
   this.slideX = 10;
-  this.isSliding = false;
+//  this.isSliding = false;
 }
 Background.prototype.draw = function() {
   this.game.ctx.drawImage(
