@@ -24,7 +24,12 @@ Game.prototype.setListener = function () {
     if (event.keyCode === 32) this.player.isJumping = true;
   }.bind(this);
   document.onkeyup = function (event) {
-    if (event.keyCode === 65 || event.keyCode === 83) this.background.moveForward();
-    if (event.keyCode === 32) this.player.isJumping = false;
+    if (event.keyCode === 65 || event.keyCode === 83) {
+      this.background.moveForward();
+      //this.background.slide();
+    }
+    if (event.keyCode === 32) {
+      this.player.isJumping = false;
+    }
   }.bind(this);
 }

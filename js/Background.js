@@ -1,24 +1,16 @@
-//// Constructor
 function Background (game) {
-  // Estamos pasando el Canvas para pintar con los metodos CTX
   this.game = game;
-
-  // La posicion del la imagen en el canvas
   this.x = 0;
   this.y = 0;
-
   this.dx = 0; // esto va en el drawImage. NO SE COMO VA
   this.dy = 0; // esto va en el drawImage. NO SE COMO VA
-
   this.dWidth = 1280; // esto va en el drawImage. NO SE COMO VA
   this.dHeight = 680; // esto va en el drawImage. NO SE COMO VA
-
-  // creamos una nueva imagen, PARA VARIOS ESCENARIOS TENDRÉ QUE CREAR UN ARRAY DE IMAGENES
-  this.img = new Image();
+  this.img = new Image(); // creamos una nueva imagen, PARA VARIOS ESCENARIOS TENDRÉ QUE CREAR UN ARRAY DE IMAGENES
   this.img.src = "images/01-bg.png";
+  this.slideX = 10;
+  this.isSliding = false;
 }
-
-// pintamos el fondo
 Background.prototype.draw = function() {
   this.game.ctx.drawImage(
 //    (image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
@@ -33,18 +25,9 @@ Background.prototype.draw = function() {
     this.dHeight
   );
 }
-
-
-// el player se mueve hacia adelante
 Background.prototype.moveForward = function () {
   this.x += 4;
-}
-
-/*
-// escuchamos el teclado para mover el background
-Background.prototype.setListener = function () {
-  document.onkeyup = function (k) {
-    if (k.keyCode === 65 || k.keyCode === 83) { this.moveForward(); }
-  }.bind(this);
-}
-*/
+}/*
+Background.prototype.slide = function () {
+  if(this.isSliding) { this.x += this.slideX * 2 }
+}*/
