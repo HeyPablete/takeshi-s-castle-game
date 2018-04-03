@@ -6,7 +6,15 @@ function Game (canvasId) {
   this.obstacle = [];
   this.generateObstacle();
   this.fps = 60;
+  this.framesCounter = 0;
 }
+
+Game.prototype.reset = function() {
+  this.background = new Background(this);
+  this.player = new Player(this);
+  this.framesCounter = 0;
+  this.obstacle = [];
+};
 Game.prototype.clearAll = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 };
@@ -19,11 +27,18 @@ Game.prototype.drawAll = function () {
   this.obstacle.forEach( function (o) { o.draw(); } );
 }
 Game.prototype.start = function () {
+  console.log("AL TURRÓN!!");
   this.interval = setInterval( function () {
     this.clearAll();
     this.drawAll();
-    this.generateObstacle();
+    //this.generateObstacle();
     this.obstacle.forEach( function (o) { o.move(); } );
+    this.framesCounter += 1;
+    if (this.framesCounter >= 1000) { this.framesCounter = 0; }
+    if (this.framesCounter % 100 === 0) { this.generateObstacle(); }
+    //if (this.isCollision()) { this.gameOver(); }
+    //if (this.framesCounter % 100 === 0) { this.score.incrementScore(); }
+
     this.setListener();
 
   }.bind(this), 1000/this.fps);

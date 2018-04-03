@@ -1,8 +1,8 @@
 function Obstacle (game) {
   this.game = game;
   this.x = 300;
-//  this.x = this.game.canvas.width;
-  this.y = 300;
+  this.x = this.game.canvas.width - 300;
+  this.y = this.game.canvas.height - 50;
   this.width = 100;
   this.height = 50;
   this.colorObstacle = "#0000ff";
