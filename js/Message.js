@@ -15,5 +15,4 @@ Message.prototype.draw = function (textToPrint) {
 }
 
 
-
 //Messages.prototype.list = function () {}

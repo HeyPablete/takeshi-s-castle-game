@@ -16,6 +16,9 @@ Game.prototype.reset = function() {
   this.background = new Background(this);
   this.player = new Player(this);
   this.obstacle = new Obstacle (this, this.canvas.width - 400);
+  this.generateObstacle( this.howManyObstacles );
+  this.message.draw(this.message.text.hit);
+  console.log("HIT");
 };
 Game.prototype.clearAll = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -55,18 +58,18 @@ Game.prototype.setListener = function () {
 
 
 Game.prototype.stop = function() {
+  this.arrObstacle = [];
   clearInterval(this.interval);
 };
 Game.prototype.generateObstacle = function( numObstacles ) {
   // cojer todos los obstaculos y ponerlos en una posicion diferente
-  var posObtacleX = this.player.x + 200;
+  var posObtacleX = Math.random() * 100 + this.player.x + 100;
   for (var i = 1; i <= numObstacles; i++) {
     posObtacleX = i * 100 + posObtacleX;
     this.arrObstacle.push( new Obstacle(this, posObtacleX) );
     console.log(this.arrObstacle);
     console.log(posObtacleX);
   }
-
 };
 Game.prototype.isCollision = function () {
   return this.arrObstacle.some( function ( obs ) {
@@ -77,9 +80,7 @@ Game.prototype.isCollision = function () {
 };
 Game.prototype.gameOver = function () {
   this.stop();
-  /////////
-
-  /////////
+  this.message.draw( this.message.text.gameover );
   if( confirm("GAME OVER. Play again?") ) {
     this.reset();
     this.start();
