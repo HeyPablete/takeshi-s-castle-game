@@ -33,12 +33,8 @@ Game.prototype.start = function () {
     this.clearAll();
     this.drawAll();
     this.player.jump();
-    if(this.player.y <=400){
-      this.player.isJumping = false;
-    }
-    if(this.player.y + this.player.height >= this.canvas.height -10){
-      this.player.onFloor = true;
-    }
+    if (this.player.y <= 400) { this.player.isJumping = false; }
+    if (this.player.y + this.player.height >= this.canvas.height - 30) { this.player.onFloor = true; }
     if (this.isCollision()) { this.gameOver(); }
     this.setListener();
   }.bind(this), 1000/this.fps);
