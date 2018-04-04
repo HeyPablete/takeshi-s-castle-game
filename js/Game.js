@@ -8,7 +8,6 @@ function Game (canvasId) {
   this.arrObstacle = [];
   this.howManyObstacles = 5;
 //  this.generateObstacle();
-  console.log("xxxxxx");
   this.fps = 60;
 }
 
@@ -30,6 +29,7 @@ Game.prototype.start = function () {
   this.interval = setInterval( function () {
     this.clearAll();
     this.drawAll();
+    if (this.isCollision()) { this.gameOver(); }
     this.setListener();
   }.bind(this), 1000/this.fps);
   this.generateObstacle( this.howManyObstacles );
@@ -43,7 +43,7 @@ Game.prototype.setListener = function () {
   document.onkeyup = function (event) {
     if (event.keyCode === 65 || event.keyCode === 83) {
       this.background.moveForward();
-      this.arrObstacle.moveForward();
+      for (var i = 0; i < this.howManyObstacles; i++) { this.arrObstacle[i].moveForward(); }
       //this.background.slide();
     }
     if (event.keyCode === 32) {
@@ -52,6 +52,11 @@ Game.prototype.setListener = function () {
   }.bind(this);
 }
 
+
+
+Game.prototype.stop = function() {
+  clearInterval(this.interval);
+};
 Game.prototype.generateObstacle = function( numObstacles ) {
   // cojer todos los obstaculos y ponerlos en una posicion diferente
   var posObtacleX = this.player.x + 200;
@@ -62,4 +67,21 @@ Game.prototype.generateObstacle = function( numObstacles ) {
     console.log(posObtacleX);
   }
 
+};
+Game.prototype.isCollision = function () {
+  return this.arrObstacle.some( function ( obs ) {
+    return ( this.player.x + this.player.width > obs.x ) &&
+      ( obs.x + obs.width > this.player.x ) && 
+      ( this.player.y + this.player.height > obs.y )
+  }.bind(this) )
+};
+Game.prototype.gameOver = function () {
+  this.stop();
+  /////////
+
+  /////////
+  if( confirm("GAME OVER. Play again?") ) {
+    this.reset();
+    this.start();
+  }
 };
