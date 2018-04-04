@@ -4,9 +4,9 @@ function Game (canvasId) {
   this.message = new Message (this);
   this.background = new Background (this);
   this.player = new Player (this);
-  this.obstacle = new Obstacle (this, this.canvas.width - 400); // 400 es la posicion X donde se va a poner el primer objeto
+  // this.obstacle = new Obstacle (this, this.canvas.width - 400); // 400 es la posicion X donde se va a poner el primer objeto
   this.arrObstacle = [];
-  this.howManyObstacles = 5;
+  this.howManyObstacles =  5;
 //  this.generateObstacle();
   this.fps = 60;
 }
@@ -32,6 +32,13 @@ Game.prototype.start = function () {
   this.interval = setInterval( function () {
     this.clearAll();
     this.drawAll();
+    this.player.jump();
+    if(this.player.y <=400){
+      this.player.isJumping = false;
+    }
+    if(this.player.y + this.player.height >= this.canvas.height -10){
+      this.player.onFloor = true;
+    }
     if (this.isCollision()) { this.gameOver(); }
     this.setListener();
   }.bind(this), 1000/this.fps);
@@ -40,22 +47,17 @@ Game.prototype.start = function () {
   console.log("AL TURRÓN!!");
 }
 Game.prototype.setListener = function () {
-  document.onkeydown = function (event) {
-    if (event.keyCode === 32) this.player.isJumping = true;
-  }.bind(this);
   document.onkeyup = function (event) {
     if (event.keyCode === 65 || event.keyCode === 83) {
       this.background.moveForward();
       for (var i = 0; i < this.howManyObstacles; i++) { this.arrObstacle[i].moveForward(); }
       //this.background.slide();
     }
-    if (event.keyCode === 32) {
-      this.player.isJumping = false;
-    }
+    if (event.keyCode === 32 && this.player.onFloor){
+      this.player.isJumping = true;
+    } 
   }.bind(this);
 }
-
-
 
 Game.prototype.stop = function() {
   this.arrObstacle = [];
@@ -66,7 +68,7 @@ Game.prototype.generateObstacle = function( numObstacles ) {
   var posObtacleX = Math.random() * 100 + this.player.x + 100;
   for (var i = 1; i <= numObstacles; i++) {
     posObtacleX = i * 100 + posObtacleX;
-    this.arrObstacle.push( new Obstacle(this, posObtacleX) );
+    this.arrObstacle.push(new Obstacle(this, posObtacleX));
     console.log(this.arrObstacle);
     console.log(posObtacleX);
   }
@@ -79,8 +81,8 @@ Game.prototype.isCollision = function () {
   }.bind(this) )
 };
 Game.prototype.gameOver = function () {
-  this.stop();
   this.message.draw( this.message.text.gameover );
+  this.stop();
   if( confirm("GAME OVER. Play again?") ) {
     this.reset();
     this.start();

@@ -1,10 +1,9 @@
 function Obstacle (game, x) {
   this.game = game;
-  this.x = x;
-  this.y = this.game.canvas.height - 50;
-  //  this.y = this.game.canvas.height - this.height;
   this.width = 100;
-  this.height = 50;
+  this.height = 20;
+  this.x = x;
+  this.y = this.game.canvas.height - this.height;
   this.blueColor = "#0000ff";
 }
 Obstacle.prototype.draw = function() {

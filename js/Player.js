@@ -4,9 +4,10 @@ function Player (game) {
   this.height = 70;
   this.redColor = "#ff0000";
   this.x = this.game.canvas.width / 3;
-  this.y = this.game.canvas.height - this.game.canvas.height / 5;
-  this.speedY = 10;
+  this.y = (this.game.canvas.height - this.game.canvas.height / 5 ) - 20;
+  this.speedY = 5;
   this.isJumping = false;
+  this.onFloor = true;
   //this.img = new Image();
   //this.img.src = "images/player-01.png";
 }
@@ -23,8 +24,13 @@ Player.prototype.draw = function () {
   //this.background.slide();
 }
 Player.prototype.gravity = function () {
-  if(this.y < (this.game.canvas.height - this.height)) { this.y += this.speedY; }
+  if(this.y < (this.game.canvas.height - this.height - 20)) { this.y += this.speedY; }
 }
 Player.prototype.jump = function () {
-  if(this.isJumping && this.y > 400) { this.y -= this.speedY * 2 }
+  if(this.isJumping && this.y > 400) {
+    this.onFloor = false;
+    this.y -= this.speedY * 1.5;
+    this.game.background.x += 6;
+    this.game.arrObstacle.forEach(function (e) { e.x -= 6; });
+  }
 }
