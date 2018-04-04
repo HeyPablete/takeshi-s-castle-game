@@ -7,8 +7,8 @@ function Player (game) {
   this.y = this.game.canvas.height - this.game.canvas.height / 5;
   this.speedY = 10;
   this.isJumping = false;
-  this.img = new Image();
-  this.img.src = "images/player-01.png";
+  //this.img = new Image();
+  //this.img.src = "images/player-01.png";
 }
 Player.prototype.draw = function () {
 /*  this.game.ctx.drawImage(
@@ -16,7 +16,6 @@ Player.prototype.draw = function () {
         this.x, 
         this.y
   );*/
-
   this.game.ctx.fillStyle = this.redColor;
   this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
   this.gravity();

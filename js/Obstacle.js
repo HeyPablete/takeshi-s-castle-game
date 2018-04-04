@@ -13,5 +13,5 @@ Obstacle.prototype.draw = function() {
   this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
 }
 Obstacle.prototype.moveForward = function() {
-  this.x -= 4;
+  this.x -= 10; // si este valor es menor que background.x el fondo y el obstaculo daran una sensacion de perspectiva
 }

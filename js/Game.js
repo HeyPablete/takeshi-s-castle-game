@@ -21,20 +21,19 @@ Game.prototype.clearAll = function() {
 };
 Game.prototype.drawAll = function () {
   this.background.draw();
-  for (var i = 0; i < this.howManyObstacles; i++) { this.obstacle.draw(); }
   this.player.draw();
-  //this.obstacle.forEach( function (o) { o.draw(); } );
+  for (var i = 0; i < this.howManyObstacles; i++) { this.obstacle.draw(); }
+  //this.obstacle.forEach( function (o) { o.draw(); } ); 
 }
 Game.prototype.start = function () {
-  console.log("AL TURRÓN!!");
   this.message.draw(this.message.text.welcome);
+  console.log("AL TURRÓN!!");
+
   this.interval = setInterval( function () {
     this.clearAll();
     this.generateObstacle( this.howManyObstacles );
     this.arrObstacle.forEach( function (o) { o.moveForward(); } );
     this.drawAll();
-    //if (this.isCollision()) { this.gameOver(); }
-    //if (this.framesCounter % 100 === 0) { this.score.incrementScore(); }
 
     this.setListener();
 
@@ -59,10 +58,11 @@ Game.prototype.setListener = function () {
 
 
 Game.prototype.generateObstacle = function( numObstacles ) {
-  // vamos a cojer todos los obstaculos y los vamos a poner cada uno en una posicion
+  // cojer todos los obstaculos y ponerlos en una posicion diferente
   var posObtacleX = numObstacles * this.canvas.width;
 
   for (var i = 0; i < numObstacles; i++) {
     this.arrObstacle.push( new Obstacle(this) );
   }
+
 };

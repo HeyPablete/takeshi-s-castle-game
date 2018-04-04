@@ -8,7 +8,7 @@ function Background (game) {
   this.dHeight = 1900;
   this.img = new Image(); // creamos una nueva imagen, PARA VARIOS ESCENARIOS TENDRÉ QUE CREAR UN ARRAY DE IMAGENES
   this.img.src = "images/04-bg.png";
-  this.slideX = 10;
+//  this.slideX = 10;
 //  this.isSliding = false;
 }
 Background.prototype.draw = function() {
@@ -26,7 +26,7 @@ Background.prototype.draw = function() {
   );
 }
 Background.prototype.moveForward = function () {
-  this.x += 4;
+  this.x += 10;
 }/*
 Background.prototype.slide = function () {
   if(this.isSliding) { this.x += this.slideX * 2 }
