@@ -5,7 +5,8 @@ function Message (game) {
   this.text = {
     welcome: "Al turrón!!!",
     hit: "Ouch",
-    gameOver: "Nikito nipongooo!!!"
+    gameOver: "Nikito nipongooo!!!",
+    end: "YOU WIN!!!"
   }
 
 }

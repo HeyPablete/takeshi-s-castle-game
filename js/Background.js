@@ -31,3 +31,10 @@ Background.prototype.moveForward = function () {
 Background.prototype.slide = function () {
   if(this.isSliding) { this.x += this.slideX * 2 }
 }*/
+
+
+Background.prototype.end = function () {
+  if (this.x >= 2500) {
+    this.game.message.end();
+  }
+}

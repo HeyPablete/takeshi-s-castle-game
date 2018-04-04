@@ -4,23 +4,21 @@ function Game (canvasId) {
   this.message = new Message (this);
   this.background = new Background (this);
   this.player = new Player (this);
-  // this.obstacle = new Obstacle (this, this.canvas.width - 400); // 400 es la posicion X donde se va a poner el primer objeto
   this.arrObstacle = [];
   this.howManyObstacles =  5;
-//  this.generateObstacle();
   this.fps = 60;
 }
-
 
 Game.prototype.reset = function() {
   this.background = new Background(this);
   this.player = new Player(this);
   this.obstacle = new Obstacle (this, this.canvas.width - 400);
   this.generateObstacle( this.howManyObstacles );
+
   this.message.draw(this.message.text.hit);
   console.log("HIT");
 };
-Game.prototype.clearAll = function() {
+Game.prototype.clearAll = function () {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 };
 Game.prototype.drawAll = function () {
@@ -33,6 +31,7 @@ Game.prototype.start = function () {
     this.clearAll();
     this.drawAll();
     this.player.jump();
+    this.background.end();
     if (this.player.y <= 400) { this.player.isJumping = false; }
     if (this.player.y + this.player.height >= this.canvas.height - 30) { this.player.onFloor = true; }
     if (this.isCollision()) { this.gameOver(); }
@@ -60,8 +59,7 @@ Game.prototype.stop = function() {
   clearInterval(this.interval);
 };
 Game.prototype.generateObstacle = function( numObstacles ) {
-  // cojer todos los obstaculos y ponerlos en una posicion diferente
-  var posObtacleX = Math.random() * 100 + this.player.x + 100;
+  var posObtacleX = Math.random() * 100 + this.player.x + 150;
   for (var i = 1; i <= numObstacles; i++) {
     posObtacleX = i * 100 + posObtacleX;
     this.arrObstacle.push(new Obstacle(this, posObtacleX));
@@ -70,7 +68,13 @@ Game.prototype.generateObstacle = function( numObstacles ) {
   }
 };
 Game.prototype.isCollision = function () {
-  return this.arrObstacle.some( function ( obs ) {
+/*
+  if (this.x < this.obstacle.x + this.obstacle.width && this.x + this.w > this.obstacle.x &&
+    this.y < this.obstacle.y + this.obstacle.height && this.y + this.h > this.obstacle.y) {
+    return true;
+    }*/
+
+   return this.arrObstacle.some( function ( obs ) {
     return ( this.player.x + this.player.width > obs.x ) &&
       ( obs.x + obs.width > this.player.x ) && 
       ( this.player.y + this.player.height > obs.y )
