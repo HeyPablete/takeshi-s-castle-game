@@ -1,7 +1,6 @@
-function Obstacle (game) {
+function Obstacle (game, x) {
   this.game = game;
-  //this.x = [this.game.canvas.width / this.game.howManyObstacles] TIENE QUE SER UN ARRAY DE POSICIONES
-  this.x = this.game.canvas.width - 300;
+  this.x = x;
   this.y = this.game.canvas.height - 50;
   //  this.y = this.game.canvas.height - this.height;
   this.width = 100;
