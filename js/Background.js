@@ -29,14 +29,12 @@ Background.prototype.draw = function() {
 }
 Background.prototype.moveForward = function () {
   this.x += 10;
-}/*
-Background.prototype.slide = function () {
-  if(this.isSliding) { this.x += this.slideX * 2 }
-}*/
-
-
+}
 Background.prototype.end = function () {
   if (this.x >= 2500 && this.y < this.dHeight) {
     window.location.href = "theend.html";
   }
 }
+/*Background.prototype.slide = function () {
+  if(this.isSliding) { this.x += this.slideX * 2 }
+}*/

@@ -7,7 +7,6 @@ function Game (canvasId) {
   this.arrObstacle = [];
   this.howManyObstacles =  5;
   this.fps = 60;
-  this.counterTime = 0;
 }
 
 Game.prototype.reset = function() {
@@ -33,6 +32,7 @@ Game.prototype.start = function () {
     this.clearAll();
     this.drawAll();
     this.player.jump();
+    this.background.end();
     if (this.player.y <= 400) { this.player.isJumping = false; }
     if (this.player.y + this.player.height >= this.canvas.height - 30) { this.player.onFloor = true; }
     if (this.isCollision()) { this.gameOver(); }
