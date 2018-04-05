@@ -7,6 +7,7 @@ function Game (canvasId) {
   this.arrObstacle = [];
   this.howManyObstacles =  5;
   this.fps = 60;
+  this.counterTime = 0;
 }
 
 Game.prototype.reset = function() {
@@ -32,28 +33,27 @@ Game.prototype.start = function () {
     this.clearAll();
     this.drawAll();
     this.player.jump();
-    this.background.end();
     if (this.player.y <= 400) { this.player.isJumping = false; }
     if (this.player.y + this.player.height >= this.canvas.height - 30) { this.player.onFloor = true; }
     if (this.isCollision()) { this.gameOver(); }
     this.setListener();
-    setTimeout(function(){
+/*     setTimeout(function(){
       this.background.imgWelcome;
-    }, 500).bind(this);
+    }, 500).bind(this); */
     
   }.bind(this), 1000/this.fps);
   this.generateObstacle( this.howManyObstacles );
-  
-  
-  this.message.draw(this.message.text.welcome);
-  console.log("AL TURRÓN!!");
+
+  // this.message.draw(this.message.text.welcome);
+  // console.log("AL TURRÓN!!");
 }
 Game.prototype.setListener = function () {
   document.onkeyup = function (event) {
     if (event.keyCode === 65 || event.keyCode === 83) {
       this.background.moveForward();
       for (var i = 0; i < this.howManyObstacles; i++) { this.arrObstacle[i].moveForward(); }
-      //this.background.slide();
+      this.framesCounter += 1;
+      if (this.framesCounter >= 1000) { this.framesCounter = 0; }
     }
     if (event.keyCode === 32 && this.player.onFloor){
       this.player.isJumping = true;
@@ -70,8 +70,6 @@ Game.prototype.generateObstacle = function( numObstacles ) {
   for (var i = 1; i <= numObstacles; i++) {
     posObtacleX = i * 100 + posObtacleX;
     this.arrObstacle.push(new Obstacle(this, posObtacleX));
-    console.log(this.arrObstacle);
-    console.log(posObtacleX);
   }
 };
 Game.prototype.isCollision = function () {
