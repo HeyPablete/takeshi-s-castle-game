@@ -13,6 +13,7 @@ Game.prototype.reset = function() {
   this.background = new Background(this);
   this.player = new Player(this);
   this.obstacle = new Obstacle (this, this.canvas.width - 400);
+  this.arrObstacle = [];
   this.generateObstacle( this.howManyObstacles );
 
   this.message.draw(this.message.text.hit);

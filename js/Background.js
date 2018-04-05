@@ -34,7 +34,8 @@ Background.prototype.slide = function () {
 
 
 Background.prototype.end = function () {
-  if (this.x >= 2500) {
-    this.game.message.end();
+  if (this.x >= 2500 && this.y < this.dHeight) {
+    window.location.href = "theend.html";
+//    this.game.message.end();
   }
 }
