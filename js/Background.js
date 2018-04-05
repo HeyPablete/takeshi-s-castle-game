@@ -8,6 +8,8 @@ function Background (game) {
   this.dHeight = 1900;
   this.img = new Image(); // creamos una nueva imagen, PARA VARIOS ESCENARIOS TENDRÉ QUE CREAR UN ARRAY DE IMAGENES
   this.img.src = "images/04-bg.png";
+  this.imgWelcome = new Image(); // creamos una nueva imagen, PARA VARIOS ESCENARIOS TENDRÉ QUE CREAR UN ARRAY DE IMAGENES
+  this.imgWelcome.src = "images/alturron.png";
 //  this.slideX = 10;
 //  this.isSliding = false;
 }
@@ -36,6 +38,5 @@ Background.prototype.slide = function () {
 Background.prototype.end = function () {
   if (this.x >= 2500 && this.y < this.dHeight) {
     window.location.href = "theend.html";
-//    this.game.message.end();
   }
 }

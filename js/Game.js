@@ -37,8 +37,14 @@ Game.prototype.start = function () {
     if (this.player.y + this.player.height >= this.canvas.height - 30) { this.player.onFloor = true; }
     if (this.isCollision()) { this.gameOver(); }
     this.setListener();
+    setTimeout(function(){
+      this.background.imgWelcome;
+    }, 500).bind(this);
+    
   }.bind(this), 1000/this.fps);
   this.generateObstacle( this.howManyObstacles );
+  
+  
   this.message.draw(this.message.text.welcome);
   console.log("AL TURRÓN!!");
 }
@@ -82,10 +88,12 @@ Game.prototype.isCollision = function () {
   }.bind(this) )
 };
 Game.prototype.gameOver = function () {
+  window.location.href = "gameover.html";
+  /* 
   this.message.draw( this.message.text.gameover );
   this.stop();
   if( confirm("GAME OVER. Play again?") ) {
     this.reset();
     this.start();
-  }
+  } */
 };
