@@ -28,7 +28,7 @@ h2 {
 a {
   font-size: 3vw;
   display: block;
-  margin: 10vw 35% 0;
+  margin: 6vw 35% 0;
   color: purple;
   text-align: center;
 }
@@ -40,6 +40,10 @@ a {
 
 .m-left-33 {
   margin-left: 33%;
+}
+
+.m-bottom-10 {
+  margin-bottom: 10%;
 }
 
 ul {
